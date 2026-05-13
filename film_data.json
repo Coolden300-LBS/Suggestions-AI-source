@@ -1,11 +1,13 @@
 {
-    "films": {
+    "Big brother is watching": {
+        "year": 1984,
+        "genres": ["realism", "genre2"],
+        "moods": ["sad", "veri sad"]
+    },
 
-        "1984": {
-            "year": 1984,
-            "genres": ["realism", "genre2"],
-            "moods": ["sad", "veri sad"]
-        }
-        
+    "test": {
+        "year": 1,
+        "genres": ["a", "b"],
+        "moods": ["c", "d"]
     }
 }
