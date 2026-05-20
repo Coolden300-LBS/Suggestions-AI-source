@@ -1,13 +1,595 @@
 {
-    "Big brother is watching": {
-        "year": 1984,
-        "genres": ["realism", "genre2"],
-        "moods": ["sad", "veri sad"]
+    "The Godfather": {
+        "year": 1972,
+        "genres": ["crime", "drama", "tragedy"],
+        "moods": ["serious", "tense", "dark", "gritty", "dramatic"]
     },
 
-    "test": {
-        "year": 1,
-        "genres": ["a", "b"],
-        "moods": ["c", "d"]
+    "The Dark Knight": {
+        "year": 2008,
+        "genres": ["action", "crime", "thriller"],
+        "moods": ["intense", "dark", "suspenseful", "gritty", "epic"]
+    },
+
+    "Pulp Fiction": {
+        "year": 1994,
+        "genres": ["crime", "drama", "comedy"],
+        "moods": ["stylish", "quirky", "violent", "unpredictable", "cool"]
+    },
+
+    "Fight Club": {
+        "year": 1999,
+        "genres": ["drama", "thriller", "psychological"],
+        "moods": ["rebellious", "dark", "chaotic", "intense", "thought-provoking"]
+    },
+
+    "Forrest Gump": {
+        "year": 1994,
+        "genres": ["drama", "romance", "comedy"],
+        "moods": ["nostalgic", "heartwarming", "uplifting", "emotional", "sentimental"]
+    },
+
+    "Inception": {
+        "year": 2010,
+        "genres": ["sci-fi", "action", "thriller"],
+        "moods": ["mind-bending", "intense", "suspenseful", "intriguing", "epic"]
+    },
+
+    "The Matrix": {
+        "year": 1999,
+        "genres": ["sci-fi", "action", "philosophical"],
+        "moods": ["dystopian", "cool", "thought-provoking", "intense", "revolutionary"]
+    },
+
+    "Interstellar": {
+        "year": 2014,
+        "genres": ["sci-fi", "drama", "adventure"],
+        "moods": ["emotional", "awe-inspiring", "lonely", "hopeful", "cosmic"]
+    },
+
+    "The Lord of the Rings: The Fellowship of the Ring": {
+        "year": 2001,
+        "genres": ["fantasy", "adventure", "drama"],
+        "moods": ["epic", "magical", "heroic", "hopeful", "adventurous"]
+    },
+
+    "The Empire Strikes Back": {
+        "year": 1980,
+        "genres": ["sci-fi", "adventure", "action"],
+        "moods": ["dark", "tense", "dramatic", "epic", "suspenseful"]
+    },
+
+    "Gladiator": {
+        "year": 2000,
+        "genres": ["action", "drama", "historical"],
+        "moods": ["revengeful", "epic", "tragic", "heroic", "intense"]
+    },
+
+    "Titanic": {
+        "year": 1997,
+        "genres": ["romance", "drama", "historical"],
+        "moods": ["tragic", "romantic", "emotional", "melancholic", "dramatic"]
+    },
+
+    "Avatar": {
+        "year": 2009,
+        "genres": ["sci-fi", "adventure", "fantasy"],
+        "moods": ["vibrant", "immersive", "epic", "awe-inspiring", "adventurous"]
+    },
+
+    "Jurassic Park": {
+        "year": 1993,
+        "genres": ["sci-fi", "adventure", "thriller"],
+        "moods": ["exciting", "tense", "awe", "dangerous", "thrilling"]
+    },
+
+    "The Lion King": {
+        "year": 1994,
+        "genres": ["animation", "drama", "adventure"],
+        "moods": ["emotional", "nostalgic", "uplifting", "tragic", "heartwarming"]
+    },
+
+    "The Social Network": {
+        "year": 2010,
+        "genres": ["drama", "biography", "historical"],
+        "moods": ["cold", "intellectual", "tense", "ambitious", "dramatic"]
+    },
+
+    "Parasite": {
+        "year": 2019,
+        "genres": ["thriller", "drama", "dark comedy"],
+        "moods": ["suspenseful", "satirical", "dark", "tense", "uncomfortable"]
+    },
+
+    "Whiplash": {
+        "year": 2014,
+        "genres": ["drama", "music", "psychological"],
+        "moods": ["intense", "stressful", "motivational", "dark", "driven"]
+    },
+
+    "La La Land": {
+        "year": 2016,
+        "genres": ["romance", "musical", "drama"],
+        "moods": ["dreamy", "nostalgic", "romantic", "melancholic", "uplifting"]
+    },
+
+    "The Prestige": {
+        "year": 2006,
+        "genres": ["thriller", "drama", "mystery"],
+        "moods": ["mysterious", "dark", "obsessive", "suspenseful", "twisty"]
+    },
+
+    "Memento": {
+        "year": 2000,
+        "genres": ["thriller", "mystery", "psychological"],
+        "moods": ["confusing", "dark", "tense", "intriguing", "fragmented"]
+    },
+
+    "The Departed": {
+        "year": 2006,
+        "genres": ["crime", "thriller", "drama"],
+        "moods": ["tense", "violent", "suspenseful", "gritty", "paranoid"]
+    },
+
+    "Goodfellas": {
+        "year": 1990,
+        "genres": ["crime", "drama", "biography"],
+        "moods": ["gritty", "stylish", "violent", "intense", "realistic"]
+    },
+
+    "Scarface": {
+        "year": 1983,
+        "genres": ["crime", "drama", "action"],
+        "moods": ["violent", "dark", "ambitious", "gritty", "tragic"]
+    },
+
+    "Avengers: Endgame": {
+        "year": 2019,
+        "genres": ["action", "sci-fi", "superhero"],
+        "moods": ["epic", "emotional", "heroic", "nostalgic", "intense"]
+    },
+
+    "Avengers: Infinity War": {
+        "year": 2018,
+        "genres": ["action", "sci-fi", "superhero"],
+        "moods": ["dark", "epic", "tense", "tragic", "intense"]
+    },
+
+    "Spider-Man: Into the Spider-Verse": {
+        "year": 2018,
+        "genres": ["animation", "action", "sci-fi"],
+        "moods": ["vibrant", "fun", "energetic", "inspiring", "creative"]
+    },
+
+    "Dune": {
+        "year": 2021,
+        "genres": ["sci-fi", "adventure", "drama"],
+        "moods": ["epic", "serious", "mysterious", "intense", "awe-inspiring"]
+    },
+
+    "Blade Runner 2049": {
+        "year": 2017,
+        "genres": ["sci-fi", "drama", "mystery"],
+        "moods": ["lonely", "melancholic", "slow", "atmospheric", "philosophical"]
+    },
+
+    "Mad Max: Fury Road": {
+        "year": 2015,
+        "genres": ["action", "adventure", "sci-fi"],
+        "moods": ["chaotic", "intense", "fast-paced", "gritty", "adrenaline"]
+    },
+
+    "John Wick": {
+        "year": 2014,
+        "genres": ["action", "thriller", "crime"],
+        "moods": ["stylish", "violent", "focused", "intense", "revengeful"]
+    },
+
+    "John Wick: Chapter 4": {
+        "year": 2023,
+        "genres": ["action", "thriller", "crime"],
+        "moods": ["epic", "violent", "stylish", "tense", "gritty"]
+    },
+
+    "Joker": {
+        "year": 2019,
+        "genres": ["drama", "crime", "psychological"],
+        "moods": ["dark", "disturbing", "sad", "intense", "unsettling"]
+    },
+
+    "The Batman (2022)": {
+        "year": 2022,
+        "genres": ["action", "crime", "thriller"],
+        "moods": ["dark", "noir", "gritty", "suspenseful", "mysterious"]
+    },
+
+    "Oppenheimer": {
+        "year": 2023,
+        "genres": ["drama", "biography", "historical"],
+        "moods": ["serious", "tense", "philosophical", "dramatic", "heavy"]
+    },
+
+    "Barbie (2023)": {
+        "year": 2023,
+        "genres": ["comedy", "fantasy", "drama"],
+        "moods": ["colorful", "satirical", "fun", "absurd", "lighthearted"]
+    },
+
+    "Everything Everywhere All at Once": {
+        "year": 2022,
+        "genres": ["sci-fi", "comedy", "drama"],
+        "moods": ["chaotic", "emotional", "weird", "heartwarming", "mind-bending"]
+    },
+
+    "The Backrooms (Upcoming)": {
+        "year": 2026,
+        "genres": ["horror", "sci-fi", "mystery"],
+        "moods": ["creepy", "liminal", "uneasy", "isolated", "disturbing"]
+    },
+
+    "Frozen": {
+        "year": 2013,
+        "genres": ["animation", "fantasy", "musical"],
+        "moods": ["uplifting", "magical", "family-friendly", "emotional", "fun"]
+    },
+
+    "Toy Story": {
+        "year": 1995,
+        "genres": ["animation", "comedy", "adventure"],
+        "moods": ["nostalgic", "fun", "heartwarming", "playful", "emotional"]
+    },
+
+    "Toy Story 3": {
+        "year": 2010,
+        "genres": ["animation", "adventure", "drama"],
+        "moods": ["emotional", "nostalgic", "bittersweet", "heartwarming", "tense"]
+    },
+
+    "Coco": {
+        "year": 2017,
+        "genres": ["animation", "fantasy", "drama"],
+        "moods": ["emotional", "colorful", "heartwarming", "nostalgic", "uplifting"]
+    },
+
+    "Up": {
+        "year": 2009,
+        "genres": ["animation", "adventure", "drama"],
+        "moods": ["emotional", "nostalgic", "heartwarming", "bittersweet", "inspiring"]
+    },
+
+    "Inside Out": {
+        "year": 2015,
+        "genres": ["animation", "comedy", "drama"],
+        "moods": ["emotional", "thoughtful", "fun", "heartwarming", "relatable"]
+    },
+
+    "Finding Nemo": {
+        "year": 2003,
+        "genres": ["animation", "adventure", "comedy"],
+        "moods": ["fun", "adventurous", "heartwarming", "emotional", "lighthearted"]
+    },
+
+    "Shrek": {
+        "year": 2001,
+        "genres": ["animation", "comedy", "fantasy"],
+        "moods": ["funny", "irreverent", "lighthearted", "satirical", "quirky"]
+    },
+
+    "Kung Fu Panda": {
+        "year": 2008,
+        "genres": ["animation", "action", "comedy"],
+        "moods": ["fun", "motivational", "uplifting", "energetic", "lighthearted"]
+    },
+
+    "How to Train Your Dragon": {
+        "year": 2010,
+        "genres": ["animation", "fantasy", "adventure"],
+        "moods": ["emotional", "epic", "heartwarming", "inspiring", "adventurous"]
+    },
+
+    "Spirited Away": {
+        "year": 2001,
+        "genres": ["animation", "fantasy", "adventure"],
+        "moods": ["magical", "mysterious", "dreamlike", "emotional", "enchanting"]
+    },
+
+    "Akira": {
+        "year": 1988,
+        "genres": ["animation", "sci-fi", "action"],
+        "moods": ["dark", "intense", "cyberpunk", "chaotic", "gritty"]
+    },
+
+    "Your Name": {
+        "year": 2016,
+        "genres": ["animation", "romance", "fantasy"],
+        "moods": ["emotional", "romantic", "dreamlike", "nostalgic", "bittersweet"]
+    },
+
+    "Weathering With You": {
+        "year": 2019,
+        "genres": ["animation", "romance", "fantasy"],
+        "moods": ["emotional", "rainy", "romantic", "melancholic", "magical"]
+    },
+
+    "Oldboy": {
+        "year": 2003,
+        "genres": ["thriller", "drama", "mystery"],
+        "moods": ["dark", "violent", "twisted", "suspenseful", "disturbing"]
+    },
+
+    "Memories of Murder": {
+        "year": 2003,
+        "genres": ["crime", "drama", "thriller"],
+        "moods": ["dark", "realistic", "suspenseful", "tense", "somber"]
+    },
+
+    "Train to Busan": {
+        "year": 2016,
+        "genres": ["horror", "action", "thriller"],
+        "moods": ["tense", "emotional", "fast-paced", "scary", "chaotic"]
+    },
+
+    "The Handmaiden": {
+        "year": 2016,
+        "genres": ["thriller", "romance", "drama"],
+        "moods": ["sensual", "suspenseful", "dark", "twisty", "emotional"]
+    },
+
+    "City of God": {
+        "year": 2002,
+        "genres": ["crime", "drama", "thriller"],
+        "moods": ["gritty", "violent", "realistic", "intense", "raw"]
+    },
+
+    "Amélie": {
+        "year": 2001,
+        "genres": ["romance", "comedy", "drama"],
+        "moods": ["whimsical", "quirky", "romantic", "uplifting", "colorful"]
+    },
+
+    "The Grand Budapest Hotel": {
+        "year": 2014,
+        "genres": ["comedy", "drama", "adventure"],
+        "moods": ["stylish", "quirky", "fun", "nostalgic", "whimsical"]
+    },
+
+    "Django Unchained": {
+        "year": 2012,
+        "genres": ["western", "drama", "action"],
+        "moods": ["violent", "revengeful", "stylish", "intense", "gritty"]
+    },
+
+    "Inglourious Basterds": {
+        "year": 2009,
+        "genres": ["war", "drama", "thriller"],
+        "moods": ["tense", "violent", "stylish", "suspenseful", "darkly humorous"]
+    },
+
+    "Kill Bill Vol. 1": {
+        "year": 2003,
+        "genres": ["action", "thriller", "crime"],
+        "moods": ["stylish", "violent", "revengeful", "intense", "dramatic"]
+    },
+
+    "Kill Bill Vol. 2": {
+        "year": 2004,
+        "genres": ["action", "thriller", "drama"],
+        "moods": ["revengeful", "emotional", "slow-burn", "intense", "dramatic"]
+    },
+
+    "The Hateful Eight": {
+        "year": 2015,
+        "genres": ["western", "thriller", "drama"],
+        "moods": ["tense", "claustrophobic", "dark", "suspenseful", "violent"]
+    },
+
+    "Once Upon a Time in Hollywood": {
+        "year": 2019,
+        "genres": ["comedy", "drama", "historical"],
+        "moods": ["nostalgic", "relaxed", "quirky", "stylish", "melancholic"]
+    },
+
+    "No Country for Old Men": {
+        "year": 2007,
+        "genres": ["crime", "thriller", "drama"],
+        "moods": ["tense", "cold", "minimalist", "dark", "suspenseful"]
+    },
+
+    "There Will Be Blood": {
+        "year": 2007,
+        "genres": ["drama", "historical", "tragedy"],
+        "moods": ["dark", "intense", "ambitious", "cold", "tragic"]
+    },
+
+    "The Wolf of Wall Street": {
+        "year": 2013,
+        "genres": ["comedy", "crime", "biography"],
+        "moods": ["chaotic", "wild", "fun", "excessive", "energetic"]
+    },
+
+    "Sicario": {
+        "year": 2015,
+        "genres": ["thriller", "crime", "drama"],
+        "moods": ["tense", "dark", "suspenseful", "gritty", "morally complex"]
+    },
+
+    "Prisoners": {
+        "year": 2013,
+        "genres": ["thriller", "drama", "mystery"],
+        "moods": ["dark", "tense", "emotional", "disturbing", "suspenseful"]
+    },
+
+    "Arrival": {
+        "year": 2016,
+        "genres": ["sci-fi", "drama", "mystery"],
+        "moods": ["thoughtful", "calm", "emotional", "philosophical", "slow"]
+    },
+
+    "Her": {
+        "year": 2013,
+        "genres": ["romance", "sci-fi", "drama"],
+        "moods": ["lonely", "emotional", "soft", "melancholic", "intimate"]
+    },
+
+    "Ex Machina": {
+        "year": 2014,
+        "genres": ["sci-fi", "thriller", "drama"],
+        "moods": ["tense", "cold", "intellectual", "suspenseful", "minimalist"]
+    },
+
+    "Alien": {
+        "year": 1979,
+        "genres": ["horror", "sci-fi", "thriller"],
+        "moods": ["claustrophobic", "scary", "tense", "dark", "suspenseful"]
+    },
+
+    "Aliens": {
+        "year": 1986,
+        "genres": ["action", "sci-fi", "horror"],
+        "moods": ["intense", "military", "fast-paced", "suspenseful", "heroic"]
+    },
+
+    "Predator": {
+        "year": 1987,
+        "genres": ["action", "sci-fi", "horror"],
+        "moods": ["tense", "jungle", "violent", "survival", "suspenseful"]
+    },
+
+    "Terminator 2: Judgment Day": {
+        "year": 1991,
+        "genres": ["action", "sci-fi", "thriller"],
+        "moods": ["epic", "intense", "hopeful", "suspenseful", "dramatic"]
+    },
+
+    "The Terminator": {
+        "year": 1984,
+        "genres": ["action", "sci-fi", "thriller"],
+        "moods": ["dark", "tense", "futuristic", "suspenseful", "gritty"]
+    },
+
+    "Rocky": {
+        "year": 1976,
+        "genres": ["drama", "sports", "romance"],
+        "moods": ["motivational", "uplifting", "gritty", "emotional", "determined"]
+    },
+
+    "Creed": {
+        "year": 2015,
+        "genres": ["drama", "sports", "action"],
+        "moods": ["motivational", "intense", "emotional", "uplifting", "gritty"]
+    },
+
+    "Black Panther": {
+        "year": 2018,
+        "genres": ["action", "sci-fi", "superhero"],
+        "moods": ["epic", "heroic", "uplifting", "stylish", "serious"]
+    },
+
+    "Doctor Strange": {
+        "year": 2016,
+        "genres": ["action", "fantasy", "sci-fi"],
+        "moods": ["mind-bending", "mystical", "colorful", "fun", "epic"]
+    },
+
+    "Thor: Ragnarok": {
+        "year": 2017,
+        "genres": ["action", "comedy", "fantasy"],
+        "moods": ["fun", "colorful", "quirky", "energetic", "epic"]
+    },
+
+    "Guardians of the Galaxy": {
+        "year": 2014,
+        "genres": ["action", "sci-fi", "comedy"],
+        "moods": ["fun", "quirky", "energetic", "adventurous", "lighthearted"]
+    },
+
+    "Star Wars: A New Hope": {
+        "year": 1977,
+        "genres": ["sci-fi", "adventure", "fantasy"],
+        "moods": ["epic", "hopeful", "adventurous", "classic", "heroic"]
+    },
+
+    "Star Wars: Revenge of the Sith": {
+        "year": 2005,
+        "genres": ["sci-fi", "action", "tragedy"],
+        "moods": ["dark", "tragic", "epic", "intense", "dramatic"]
+    },
+
+    "Harry Potter and the Sorcerer's Stone": {
+        "year": 2001,
+        "genres": ["fantasy", "adventure", "family"],
+        "moods": ["magical", "wonder", "nostalgic", "uplifting", "whimsical"]
+    },
+
+    "Harry Potter and the Deathly Hallows Part 2": {
+        "year": 2011,
+        "genres": ["fantasy", "adventure", "drama"],
+        "moods": ["epic", "dark", "emotional", "finale", "intense"]
+    },
+
+    "The Hobbit: An Unexpected Journey": {
+        "year": 2012,
+        "genres": ["fantasy", "adventure", "family"],
+        "moods": ["adventurous", "magical", "nostalgic", "epic", "fun"]
+    },
+
+    "The Hobbit: The Desolation of Smaug": {
+        "year": 2013,
+        "genres": ["fantasy", "adventure", "action"],
+        "moods": ["dark", "epic", "tense", "adventurous", "dangerous"]
+    },
+
+    "Casino Royale": {
+        "year": 2006,
+        "genres": ["action", "thriller", "spy"],
+        "moods": ["suspenseful", "stylish", "intense", "romantic", "dark"]
+    },
+
+    "Skyfall": {
+        "year": 2012,
+        "genres": ["action", "thriller", "spy"],
+        "moods": ["dark", "emotional", "intense", "suspenseful", "dramatic"]
+    },
+
+    "No Time to Die": {
+        "year": 2021,
+        "genres": ["action", "thriller", "spy"],
+        "moods": ["emotional", "epic", "tense", "dramatic", "finale"]
+    },
+
+    "Mission: Impossible - Fallout": {
+        "year": 2018,
+        "genres": ["action", "thriller", "spy"],
+        "moods": ["fast-paced", "intense", "suspenseful", "epic", "gritty"]
+    },
+
+    "Mission: Impossible - Dead Reckoning": {
+        "year": 2023,
+        "genres": ["action", "thriller", "spy"],
+        "moods": ["epic", "tense", "fast-paced", "suspenseful", "dramatic"]
+    },
+
+    "The Hunger Games": {
+        "year": 2012,
+        "genres": ["sci-fi", "adventure", "drama"],
+        "moods": ["dark", "tense", "survival", "rebellious", "emotional"]
+    },
+
+    "The Hunger Games: Catching Fire": {
+        "year": 2013,
+        "genres": ["sci-fi", "adventure", "drama"],
+        "moods": ["tense", "rebellious", "dark", "emotional", "epic"]
+    },
+
+    "The Maze Runner": {
+        "year": 2014,
+        "genres": ["sci-fi", "adventure", "mystery"],
+        "moods": ["mysterious", "tense", "fast-paced", "survival", "dark"]
+    },
+
+    "Edge of Tomorrow": {
+        "year": 2014,
+        "genres": ["sci-fi", "action", "comedy"],
+        "moods": ["fast-paced", "fun", "intense", "repetitive", "adrenaline"]
     }
 }

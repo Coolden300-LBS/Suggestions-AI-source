@@ -1,4 +1,15 @@
-# pyside6-designer in terminal to open editor
+# pyside6-designer in terminal to open gui editor
+# Suggestions.ui is the main file
+
+# -------------------------------------------------------------------------------------
+# PSEUDO-CODE:
+# start -> load libraries -> set up gui tools -> set up gui elements ->
+# -> load film data from .json file -> create gui film card template ->
+# -> declare functions -> connect functions to inputs from gui ->
+# -> start python application
+# -------------------------------------------------------------------------------------
+
+
 
 import json, sys, re
 from PySide6 import QtWidgets, QtGui
@@ -112,3 +123,4 @@ sys.exit(app.exec())
 
 
 # TODO: add more stuff to data and sorting algorithm
+#       add more film covers (current stop: Mad Max: Fury Road)
