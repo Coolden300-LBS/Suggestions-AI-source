@@ -4,9 +4,9 @@
 # -------------------------------------------------------------------------------------
 # PSEUDO-CODE:
 # start -> load libraries -> set up gui tools -> set up gui elements ->
-# -> load film data from .json file -> create gui film card template ->
-# -> declare functions -> connect functions to inputs from gui ->
-# -> start python application
+# load film data from .json file and create dictionaries for genre/mood scores -> 
+# create card class which is both GUI element template and is data storage for movie ->
+# declare functions -> connect functions to inputs from gui -> start python application
 # -------------------------------------------------------------------------------------
 
 
@@ -43,6 +43,20 @@ DATA_PATH = f"{FOLDER_PATH}film_data.json"
 with open(DATA_PATH, "r", encoding="utf-8") as file:
     FILM_DATA = json.load(file)
 
+genre_scores = {}
+mood_scores = {}
+
+# -------------------------------------------------------------------------------------
+# create list item class to make sorting possible (gpt code here)
+# -------------------------------------------------------------------------------------
+
+class MovieItem(QtWidgets.QListWidgetItem):
+    def __lt__(self, other):
+        return (
+            self.data(QtCore.Qt.UserRole)
+            > other.data(QtCore.Qt.UserRole)
+        )
+
 # -------------------------------------------------------------------------------------
 # create film card for list manually with code 
 # (I couldn't find a way to make a visual template that can be ctrl+c ctld-v by script)
@@ -52,11 +66,13 @@ class MovieCard(QtWidgets.QWidget):
     def __init__(self, title: str, year: int, genres, moods):
         super().__init__()
 
-        # store values in card
+        # store some values in card
         self.movie_title = title
         self.movie_year = year
         self.movie_genres = genres
         self.movie_moods = moods
+        self.rated = 0 # like status. -1 = dislike, 1 = like, 0 = neutral
+        self.total_score = 0
 
         layout = QtWidgets.QHBoxLayout(self)
 
@@ -66,10 +82,16 @@ class MovieCard(QtWidgets.QWidget):
 
         # add image cover (if exists)
         simplified_title = str.lower(re.sub(r'[^a-zA-Z0-9\s]', '', title))
+        print(simplified_title)
         image_path = f"{FOLDER_PATH}FilmCovers/{simplified_title}"
-        #if Path(image_path).exists:
         pixmap = QtGui.QPixmap(image_path)
         self.image.setPixmap(pixmap.scaled(60, 90))
+
+        # fallback to placeholder if cover is missing
+        if pixmap.isNull():
+            image_path = f"{FOLDER_PATH}FilmCovers/___PLACEHOLDER"
+            pixmap = QtGui.QPixmap(image_path)
+            self.image.setPixmap(pixmap.scaled(60, 90))
 
         # container widget for text layout
         text_widget = QtWidgets.QWidget()
@@ -77,8 +99,8 @@ class MovieCard(QtWidgets.QWidget):
 
         # labels
         self.title = QtWidgets.QLabel(f"{title} ({year})")
-        self.genres = QtWidgets.QLabel(f"Genres: {genres}")
-        self.moods = QtWidgets.QLabel(f"Moods: {moods}")
+        self.genres = QtWidgets.QLabel(f"Genres: {", ".join(genres)}")
+        self.moods = QtWidgets.QLabel(f"Moods: {", ".join(moods)}")
 
         # make genres and moods wrap so they take up less space
         self.genres.setWordWrap(True)
@@ -111,8 +133,8 @@ class MovieCard(QtWidgets.QWidget):
             """)
 
         # add thumb up/down icons
-        self.like_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/like.png") )
-        self.dislike_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/dislike.png") )
+        self.like_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/like_inactive.png") )
+        self.dislike_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/dislike_inactive.png") )
 
         # set icon size
         self.like_button.setIconSize(QtCore.QSize(24, 24))
@@ -130,11 +152,73 @@ class MovieCard(QtWidgets.QWidget):
         layout.addWidget(text_widget, 1)
         layout.addWidget(button_widget)
 
-    def on_like(self):
-        print(f"{self.movie_title} is LIKED BY BILLIONS!")
+    # utility to get total movie score
+    def get_movie_score(self):
+        tot_score = 0
 
+        for genre in self.movie_genres:
+            tot_score += genre_scores.get(genre, 0)
+
+        for mood in self.movie_moods:
+            tot_score += mood_scores.get(mood, 0)
+
+        return tot_score
+
+    # updating button icons to let user know what was liked and whatnot
+    def update_self_rating(self):
+        if self.rated == 0:
+            self.like_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/like_inactive.png") )
+            self.dislike_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/dislike_inactive.png") )
+        if self.rated == 1:
+            self.like_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/like.png") )
+            self.dislike_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/dislike_inactive.png") )
+        if self.rated == -1:
+            self.like_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/like_inactive.png") )
+            self.dislike_button.setIcon( QtGui.QIcon(f"{FOLDER_PATH}Assets/dislike.png") )
+
+    # applying score changes to data
+    def apply_rating_delta(self, genres, moods, delta):
+        for i in range(3): print("-------------------")
+
+        for genre in genres:
+            genre_scores[genre] = genre_scores.get(genre, 0) + delta
+            print(f"{genre} = {genre_scores[genre]}")
+
+        for i in range(3): print("-------------------")
+        
+        for mood in moods:
+            mood_scores[mood] = mood_scores.get(mood, 0) + delta
+            print(f"{mood} = {mood_scores[mood]}")
+
+    # what happens on like
+    def on_like(self):
+        old_rating = self.rated
+
+        if self.rated == 1: self.rated = 0
+        else: self.rated = 1
+
+        delta = self.rated - old_rating
+        self.apply_rating_delta(self.movie_genres, self.movie_moods, delta)
+        self.update_self_rating()
+
+        print(f"{self.movie_title} was liked = {self.rated}, D: {delta}")
+
+        filter_list()
+
+    # what happens when BILLIONS DISLIKE
     def on_dislike(self):
-        print("Dislike")
+        old_rating = self.rated
+
+        if self.rated == -1: self.rated = 0
+        else: self.rated = -1
+
+        delta = self.rated - old_rating
+        self.apply_rating_delta(self.movie_genres, self.movie_moods, delta)
+        self.update_self_rating()
+
+        print(f"{self.movie_title} was disliked = {self.rated}, D: {delta}")
+
+        filter_list()
 
 # -------------------------------------------------------------------------------------
 # functions
@@ -142,75 +226,101 @@ class MovieCard(QtWidgets.QWidget):
 
 """ Function that adds a movie with parsed data. """
 def add_movie(title: str, year: int, genres, moods):
-    item = QtWidgets.QListWidgetItem()
+    item = MovieItem()
     card = MovieCard(title, year, genres, moods)
 
     item.setSizeHint(card.sizeHint())
     list_widget.addItem(item)
     list_widget.setItemWidget(item, card)
 
-    return item
+    return item, card
 
 
 """ Function that fills movie list in GUI on start. Is not being called anywhere else. """
 def fill_list():
     for title, data in FILM_DATA.items():
-        item = add_movie(title, data["year"], ", ".join(data["genres"]), ", ".join(data["moods"]))
-        movie_items.append((item, data))
+        item, card = add_movie(title, data["year"], data["genres"], data["moods"])
+        movie_items.append((item, card))
 
 
-""" Function that is being called on each user input in search bars to filter out movies. """
+""" Function that is being called on each user input in search bars to filter out movies
+and sort them. """
 def filter_list():
     
-    """ Removes any extra signs from text. Outputs string. """
+    # Removes any extra signs from text. Outputs string.
     def refine_text(text):
         return str.lower(re.sub(r'[^a-zA-Z0-9\s]', '', text))
 
-    genre_filter = refine_text(genre_input.text()).split()
-    mood_filter = refine_text(mood_input.text()).split()
+    def filter_movies():
 
-    # if we have any filters typed in, we sort list, otherwise turn on all elements
-    if len(genre_filter) + len(mood_filter) > 0:
-        for item, data in movie_items:
+        genre_filter = refine_text(genre_input.text()).split()
+        mood_filter = refine_text(mood_input.text()).split()
 
-            required_matches = 0
-            matches = 0
+        # if we have any filters typed in, we sort list, otherwise turn on all elements
+        if len(genre_filter) + len(mood_filter) > 0:
+            for item, card in movie_items:
 
-            # looking for matching genre filters
-            required_matches = len(genre_filter)
-            for gfilter in genre_filter:
-                for genre in data["genres"]:
-                    if str.find(refine_text(genre), gfilter) > -1:
-                        matches += 1
+                required_matches = 0
+                matches = 0
 
-            # if check didn't pass, hide card and proceed to next one
-            if matches < required_matches:
-                item.setHidden(True)
-                continue
+                # looking for matching genre filters
+                required_matches = len(genre_filter)
+                for gfilter in genre_filter:
+                    for genre in card.movie_genres:
+                        if str.find(refine_text(genre), gfilter) > -1:
+                            matches += 1
 
-            print(required_matches)
-            print(matches)
+                # if check didn't pass, hide card and proceed to next one
+                if matches < required_matches:
+                    item.setHidden(True)
+                    continue
 
-            # reset matches!
-            matches = 0
+                #print(required_matches)
+                #print(matches)
 
-            # do similar check for moods
-            required_matches = len(mood_filter)
-            for mfilter in mood_filter:
-                for mood in data["moods"]:
-                    if str.find(refine_text(mood), mfilter) > -1:
-                        matches += 1
+                # reset matches!
+                matches = 0
 
-            # ~//~
-            if matches < required_matches:
-                item.setHidden(True)
-                continue
+                # do similar check for moods
+                required_matches = len(mood_filter)
+                for mfilter in mood_filter:
+                    for mood in card.movie_moods:
+                        if str.find(refine_text(mood), mfilter) > -1:
+                            matches += 1
 
-            # after all the checks passed we can enable card
-            item.setHidden(False)
-    else:
-        for item, data in movie_items:
-            item.setHidden(False)
+                # ~//~
+                if matches < required_matches:
+                    item.setHidden(True)
+                    continue
+
+                # after all the checks passed we can enable card
+                item.setHidden(False)
+        else:
+            for item, card in movie_items:
+                item.setHidden(False)
+    
+    # sort movies based on priority (highest score = up)
+    def prioritize_movies():
+        scored_movies = []
+
+        for item, card in movie_items:
+            score = card.get_movie_score()
+            item.setData(QtCore.Qt.UserRole, score) # here we give list item score for sorting priority
+            scored_movies.append((score, item, card))
+
+        scored_movies.sort(
+            key=lambda x: x[0],
+            reverse=True
+        )
+
+        # debug
+        #for score, item, card in scored_movies:
+        #    print(score, card.movie_title)
+
+        list_widget.sortItems()
+
+    filter_movies()
+    prioritize_movies()
 
 # -------------------------------------------------------------------------------------
 # input connections
@@ -237,9 +347,8 @@ TODO:   - (done) fix sorting algorithm. Current issue: sorts through all genre/m
         - (done) add like/dislike button to films
         - (done) make sure buttons are working
         - (done) fix buttons position and ugly looking
-        
-        - make points system for genres and moods
-        - make picked films with most points appear upper in list, while ones with lesser points go down
-        - when new filter consists of one letter it tends to add other films to list (?)
-        - add more film covers (current stop: Mad Max: Fury Road)
+        - (done) make points system for genres and moods
+        - (DONEEEE) make picked films with most points appear upper in list, while ones with lesser points go down
+        - (don't care, let it be) when new filter consists of one letter it tends to add other films to list (?)
+        - (partially done) add more film covers
 """

@@ -197,7 +197,7 @@
         "moods": ["dark", "disturbing", "sad", "intense", "unsettling"]
     },
 
-    "The Batman (2022)": {
+    "The Batman": {
         "year": 2022,
         "genres": ["action", "crime", "thriller"],
         "moods": ["dark", "noir", "gritty", "suspenseful", "mysterious"]
@@ -209,7 +209,7 @@
         "moods": ["serious", "tense", "philosophical", "dramatic", "heavy"]
     },
 
-    "Barbie (2023)": {
+    "Barbie": {
         "year": 2023,
         "genres": ["comedy", "fantasy", "drama"],
         "moods": ["colorful", "satirical", "fun", "absurd", "lighthearted"]
@@ -221,7 +221,7 @@
         "moods": ["chaotic", "emotional", "weird", "heartwarming", "mind-bending"]
     },
 
-    "The Backrooms (Upcoming)": {
+    "The Backrooms": {
         "year": 2026,
         "genres": ["horror", "sci-fi", "mystery"],
         "moods": ["creepy", "liminal", "uneasy", "isolated", "disturbing"]
