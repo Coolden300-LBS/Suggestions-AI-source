@@ -1,5 +1,5 @@
 # pyside6-designer in terminal to open gui editor
-# Suggestions.ui is the main file
+# Suggestions.ui is the main gui file
 
 # -------------------------------------------------------------------------------------
 # PSEUDO-CODE:
@@ -33,6 +33,7 @@ window = loader.load(f"{FOLDER_PATH}Suggestions.ui")
 genre_input = window.findChild(QtWidgets.QLineEdit, "genre_preferences")
 mood_input = window.findChild(QtWidgets.QLineEdit, "mood_preferences")
 list_widget = window.findChild(QtWidgets.QListWidget, "film_list")
+movie_items = [] # this one fills up in fill_list function
 
 # -------------------------------------------------------------------------------------
 # film data setup
@@ -85,6 +86,7 @@ class MovieCard(QtWidgets.QWidget):
 # functions
 # -------------------------------------------------------------------------------------
 
+""" Function that adds a movie with parsed data. """
 def add_movie(title: str, year: int, genres, moods):
     item = QtWidgets.QListWidgetItem()
     card = MovieCard(title, year, genres, moods)
@@ -93,17 +95,57 @@ def add_movie(title: str, year: int, genres, moods):
     list_widget.addItem(item)
     list_widget.setItemWidget(item, card)
 
+    return item
+
+
+""" Function that fills movie list in GUI on start. Is not being called anywhere else. """
+def fill_list():
+    for title, data in FILM_DATA.items():
+        item = add_movie(title, data["year"], ", ".join(data["genres"]), ", ".join(data["moods"]))
+        movie_items.append((item, data))
+
+
+""" Function that is being called on each user input in search bars to filter out movies. """
 def filter_list():
     
-    def clear_input(input):
-        return str.lower(re.sub(r'[^a-zA-Z0-9\s]', '', input)).split()
+    # refines text to remove any extra signs
+    def refine_text(text):
+        return str.lower(re.sub(r'[^a-zA-Z0-9\s]', '', text)).split()
 
-    genres = clear_input(genre_input.text())
-    moods = clear_input(mood_input.text())
+    genre_filter = refine_text(genre_input.text())
+    mood_filter = refine_text(mood_input.text())
 
-    list_widget.clear()
-    for title, data in FILM_DATA.items():
-        add_movie(title, data["year"], ", ".join(data["genres"]), ", ".join(data["moods"]))
+    # if we have any filters typed in, we sort list, otherwise turn on all elements
+    if len(genre_filter) + len(mood_filter) > 0:
+        for item, data in movie_items:
+
+            visible = False
+            found = False
+
+            # looking for matching genre filters
+            for gfilter in genre_filter:
+                for genre in data["genres"]:
+                    if str.find(refine_text(genre), gfilter) == -1:
+                        found = True
+                        break
+                if not found: break
+                visible = True
+
+            found = False
+
+            # and same for moods
+            """for mfilter in mood_filter:
+                for mood in data["moods"]:
+                    if str.find(refine_text(mood), mfilter) == -1:
+                        found = True
+                        break
+                if not found: break
+                visible = True"""
+
+            item.setHidden(not visible)
+    else:
+        for item, data in movie_items:
+            item.setHidden(False)
 
 # -------------------------------------------------------------------------------------
 # input connections
@@ -116,11 +158,10 @@ mood_input.textEdited.connect(filter_list)
 # application run
 # -------------------------------------------------------------------------------------
 
-filter_list()
+fill_list()
 window.show()
 sys.exit(app.exec())
 
 
 
-# TODO: add more stuff to data and sorting algorithm
-#       add more film covers (current stop: Mad Max: Fury Road)
+# TODO: add more film covers (current stop: Mad Max: Fury Road)   
